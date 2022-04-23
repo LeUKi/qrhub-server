@@ -1,10 +1,9 @@
 const router = require('./node_modules/koa-router')()
-const Query = require('./routers/Query')
-const Catcher = require('./routers/Catcher')
-const Like = require('./routers/Like')
-const Clientjs = require('./routers/Clientjs')
-router.use(Query)
-router.use(Catcher)
-router.use(Like)
-router.use(Clientjs)
+
+const QRPost = require('./routers/QRPost')
+router.use(QRPost)
+
+const ConfigGet = require('./routers/configGet')
+router.use(ConfigGet)
+
 module.exports = router.routes()
