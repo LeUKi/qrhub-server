@@ -7,20 +7,27 @@ const {
 router.post('/qrPost', async (ctx, next) => {
     let data = {
         code: ctx.request.body.code,
-        configid: ObjectId(ctx.request.body.configid),
+        configid: ctx.request.body.configid,
     }
-    console.log(data);
+
+    console.log("/qrPost",ctx.request.body);
 
     //判断配置是否启用
     let config = await getDB.find('configs', {
-        _id: data.configid
+        _id: new ObjectId(ctx.request.body.configid)
     });
-    console.log(config);
+    // console.log(config);
     if (config && config[0].state) {
-
         //查询码是否存在
-        let qr = await getDB.find('codes', data)
-        console.log(qr);
+        const qr = await getDB.find('codes', {
+            configid: data.configid,
+            code: data.code
+        });
+        // console.log("req",{
+        //     configid: data.configid,
+        //     code: data.code
+        // });
+        // console.log("rep",qr[0]);
         if (qr[0]) {
             //判断是否已经完成
             if (qr[0].finish) {
@@ -52,9 +59,21 @@ router.post('/qrPost', async (ctx, next) => {
                     code: 0,
                     msg: '扫描成功',
                     data: {
-                        no: qr[0].no+1,
+                        no: qr[0].no + 1,
                         finish: config[0].finish
                     }
+                }
+            }
+        } else {
+            ctx.body = {
+                code: -2,
+                msg: 'error',
+                data: {
+                    requst: {
+                        code: data.code,
+                        configid: data.configid,
+                    },
+                    qr: qr
                 }
             }
         }

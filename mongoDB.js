@@ -1,4 +1,6 @@
-const { MongoClient } = require('./node_modules/mongodb');
+const {
+    MongoClient
+} = require('./node_modules/mongodb');
 const Config = require('./VCconfig');
 class Db {
     static getInstance() {
@@ -72,6 +74,19 @@ class Db {
         })
     }
 
+    insertMany(coll, data) {
+        return new Promise((resolve, reject) => {
+            this.connect().then(db => {
+                db.collection(coll).insertMany(data, (err, result) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(result);
+                });
+            })
+        })
+    }
+
 
     deleteOne(coll, query) {
         return new Promise((resolve, reject) => {
@@ -118,5 +133,3 @@ class Db {
 }
 
 module.exports = Db.getInstance();
-
-
