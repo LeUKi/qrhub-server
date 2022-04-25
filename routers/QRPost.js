@@ -47,7 +47,7 @@ router.post('/qrPost', async (ctx, next) => {
                 })
                 //配置中数量自增
                 await getDB.updateOne('configs', {
-                    _id: data.configid
+                    _id: new ObjectId(ctx.request.body.configid)
                 }, {
                     $inc: {
                         finish: 1
@@ -59,8 +59,8 @@ router.post('/qrPost', async (ctx, next) => {
                     code: 0,
                     msg: '扫描成功',
                     data: {
-                        no: qr[0].no + 1,
-                        finish: config[0].finish
+                        no: qr[0].no,
+                        finish: config[0].finish+1
                     }
                 }
             }
