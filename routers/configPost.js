@@ -28,11 +28,16 @@ router.post('/codeGen', async (ctx, next) => {
         _id: ObjectId(data.configid)
     });
     if (config[0]) {
-        let codes = codeGen(config[0].rules)
-        
+        if (config[0].codeGen) {
+            let codes = codeGen(config[0].rules)
+            await getDB.insertMany('codes', d)
+            
+        }else{
+            
+        }
 
     }else{
-        
+
     }
 
     // const d = DATA.map((e, i) => {
