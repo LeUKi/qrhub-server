@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,9 +10,18 @@
     <script src="qrcode.js"></script>
     <script src="codeGen.js"></script>
 </head>
+
 <body>
     <div id="app">
-        <input type="text" v-model="rules" @change="codeGen"/>
+        <div>
+            e.g.<br>
+            ["字符串"]：["AABB1122"]、["XXXXXX"]<br>
+            [数字开始-数字结束(-高位填充(-步长))]：[1-100]、[1-100-X]、[1-100-0-2]<br>
+            [字母开始-字母结束]：[a-z]、[A-Z]<br>
+            [关键词]：[YYYY]、[YY]、[MM]、[DD]、[HH]、[hh]、[mm]、[ss]
+        </div>
+
+        <input type="text" v-model="rules" @change="codeGen" />
         <BUTTon @click="codeGen">生成code</BUTTon>
         <BUTTon @click="Gen">生成qr码</BUTTon>
         <div v-for="(c,i) in codes" :key="i">
