@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义规则</title>
+    <script src="vue.js"></script>
+    <script src="qrcode.js"></script>
+    <script src="codeGen.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="rules" @change="codeGen"/>
+        <BUTTon @click="codeGen">生成code</BUTTon>
+        <BUTTon @click="Gen">生成qr码</BUTTon>
+        <div v-for="(c,i) in codes" :key="i">
+            <div :id="c" :class="c"></div>
+            <div>{{c}}</div>
+        </div>
+    </div>
+</body>
+<script>
+    var Vue = window.Vue;
+    var VueQrcode = window.VueQrcode;
+    Vue.component('qrcode', VueQrcode);
+    var app = new Vue({
+        el: '#app',
+        mounted: function () {
+            console.log('vue加载完成');
+            this.codes = this.codeGen(this.rule)
+            console.log(this.codes);
+            this.codeGen()
+        },
+        data: {
+            rules: '["TEST"][0088-0121-A]',
+            message: 'Hello Vue!',
+            rule: [],
+            codes: [],
+            qrs: []
+        },
+        methods: {
+            qrGen(e) {
+                return new QRCode(document.getElementsByClassName(e)[0], {
+                    text: e,
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                })
+            },
+            Gen() {
+                this.qrs = this.codes.map((c) => {
+                    console.log(c);
+                    return this.qrGen(c)
+                })
+            },
+            codeGen() {
+                this.codes = window.codeGen(this.rules)
+            }
+        },
+    })
+</script>
+
+</html>
