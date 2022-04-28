@@ -122,7 +122,14 @@ function code2tips(e) {
     ]
 }
 
+function codeCheck(code, rules) {
+    let codes = codeGen(rules);
+    if (codes.includes(code)) return true;
+    return false;
+}
+
 module.exports = {
     codeGen,
-    code2tips
+    code2tips,
+    codeCheck
 }
