@@ -2,7 +2,7 @@ const router = require('../node_modules/koa-router')()
 const getDB = require('../mongoDB')
 const {
     codeGen
-} = require("../codeGen")
+} = require("../util/codeGenerator")
 const {
     ObjectId
 } = require('mongodb')
