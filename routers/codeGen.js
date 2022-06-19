@@ -17,7 +17,7 @@ router.post('/codeGen', async (ctx, next) => {
     });
     if (config[0]) {
         //判断是否已经生成
-        if (config[0].codeGen) {
+        if (!config[0].isGen) {
             let codes = codeGen(config[0].rules)
             const d = codes.map((e, i) => {
                 return {
@@ -29,11 +29,12 @@ router.post('/codeGen', async (ctx, next) => {
                     "operator": null,
                 }
             })
-            let r = await getDB.insertMany('codes', d)
+            let r1 = await getDB.insertMany('codes', d)
+            let r2 = await getDB.updateOne('configs', { _id: ObjectId(data.configid) }, { $set: { isGen: true } })
             ctx.body = {
                 code: 0,
                 msg: '生成成功',
-                data: r
+                data: { r1, r2 }
             }
         } else {
             ctx.body = {

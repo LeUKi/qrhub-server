@@ -101,6 +101,18 @@ class Db {
         })
     }
 
+    deleteMany(coll, query) {
+        return new Promise((resolve, reject) => {
+            this.connect().then(db => {
+                db.collection(coll).deleteMany(query, (err, result) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(result);
+                });
+            })
+        })
+    }
 
     updateOne(coll, query, data) {
         return new Promise((resolve, reject) => {

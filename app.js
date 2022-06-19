@@ -11,7 +11,7 @@ const {
 } = require('./node_modules/koa2-swagger-ui')
 const app = new Koa()
 console.log('VC satrt now.');
-app.use(cors())
+app.use(cors({maxAge:0}))
 app.use(bodyParser())
 app.use(koaStatic(__dirname + '/html'));
 app.use(koaSwagger({

@@ -31,15 +31,14 @@ router.post('/configPost', async (ctx, next) => {
     }
 
     // const d = DATA.map((e, i) => {
-    //     return {
-    //         "code": e,
-    //         "no": i + 1,
-    //         "finish": false,
-    //         configid,
-    //         "time": null,
-    //         "operator": null,
-    //         "codeGen": null
-    //     }
+        // return {
+        //     "code": e,
+        //     "no": i + 1,
+        //     "finish": false,
+        //     configid,
+        //     "time": null,
+        //     "operator": null,
+        // }
     // })
     // let s = await getDB.insertMany('codes', d)
 

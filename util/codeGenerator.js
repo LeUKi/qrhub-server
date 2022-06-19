@@ -32,7 +32,7 @@ function codeGen(rules) {
                         start: Number(temp[0]),
                         end: Number(temp[1]),
                         stringlen: temp[1].length,
-                        strinfill: temp[2]!=undefined ? temp[2] : "0",
+                        strinfill: temp[2] != undefined ? temp[2] : "0",
                         step: temp[3] ? Number(temp[3]) : 1,
                     })
                 }
@@ -206,7 +206,7 @@ function rulesParse(rules) {
                     start: Number(temp[0]),
                     end: Number(temp[1]),
                     stringlen: temp[1].length,
-                    strinfill: temp[2]!=undefined ? temp[2] : "0",
+                    strinfill: temp[2] != undefined ? temp[2] : "0",
                     step: temp[3] ? Number(temp[3]) : 1,
                 })
             }
@@ -219,11 +219,9 @@ function rulesParse(rules) {
     })
     return rule
 }
-if (this !== window) {
-    module.exports = {
-        codeGen,
-        rulesInfo,
-        codeCheck,
-        rulesParse
-    }
+module.exports = {
+    codeGen,
+    rulesInfo,
+    codeCheck,
+    rulesParse
 }

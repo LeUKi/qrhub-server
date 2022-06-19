@@ -4,16 +4,15 @@ const {
     ObjectId
 } = require('mongodb')
 
-router.get('/configGet', async (ctx, next) => {
-    let q = {
-        _id: ObjectId(ctx.request.query.configid)
-    }
-    let config = await getDB.find('configs', q);
-    if (config) {
+router.get('/configsGet', async (ctx, next) => {
+    let configs = await getDB.find('configs', {});
+    console.log(ctx.request);
+    console.log(configs);
+    if (configs) {
         ctx.body = {
             code: 0,
             msg: '获取成功',
-            data: { config }
+            data: { configs }
         }
     } else {
         ctx.body = {
