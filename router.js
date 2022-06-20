@@ -18,8 +18,14 @@ router.use(configDel)
 const configNew = require('./routers/configNew')
 router.use(configNew)
 
-const codeGen= require('./routers/codeGen')
+const codeGen = require('./routers/codeGen')
 router.use(codeGen)
+
+const peopStateGet = require('./routers/peopStateGet')
+router.use(peopStateGet)
+
+const codesGet = require('./routers/codesGet')
+router.use(codesGet)
 // const test=require('./routers/a')
 // router.use(test)
 

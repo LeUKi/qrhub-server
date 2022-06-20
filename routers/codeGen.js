@@ -26,7 +26,7 @@ router.post('/codeGen', async (ctx, next) => {
                     "finish": false,
                     "configid": data.configid,
                     "time": null,
-                    "operator": null,
+                    "operator": '',
                 }
             })
             let r1 = await getDB.insertMany('codes', d)
